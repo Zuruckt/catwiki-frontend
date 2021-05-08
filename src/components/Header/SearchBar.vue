@@ -1,5 +1,6 @@
 <template>
   <div class="search autocomplete">
+    <marquee behavior="" direction="">{{breeds}}</marquee>
     <span class="material-icons">search</span>
     <input type="text" v-model="breed_name" placeholder="Digite sua raça aqui"/>
     <ul v-show="breeds.length > 0" class="autocomplete-results">
@@ -13,11 +14,9 @@
 <script>
 import axios from "axios";
 const api = axios.create({
-  baseURL: "https://api.thecatapi.com/v1/",
-  headers: {
-    "x-api-key": process.env.CATAPI_KEY,
-  },
+  baseURL: 'http://localhost:8000/',
 });
+
 export default {
   data() {
     return {
@@ -43,12 +42,13 @@ export default {
   },
   methods: {
     fetchResults(query) {
-      console.log(query)
       api
-        .get('breeds/search?q=' + query)
+        .get('breeds/' + query)
         .then((response) => {
+          console.log(response);
           response.data.forEach(element => {
-            if(this.breeds.indexOf(element.name) === -1) this.breeds.push(element.name);
+            console.log(element)
+            if(this.breeds.indexOf(element) === -1) this.breeds.push(element);
           });
         });
     }
