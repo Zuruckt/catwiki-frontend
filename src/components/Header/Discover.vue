@@ -13,21 +13,9 @@
       </div>
 
       <div class="gallery">
-        <div class="image-card">
-          <img src="@/assets/img/placeholder.jpg" alt="" />
-          <h5>Gato</h5>
-        </div>
-        <div class="image-card">
-          <img src="@/assets/img/placeholder.jpg" alt="" />
-          <h5>Gato</h5>
-        </div>
-        <div class="image-card">
-          <img src="@/assets/img/placeholder.jpg" alt="" />
-          <h5>Gato</h5>
-        </div>
-        <div class="image-card">
-          <img src="@/assets/img/placeholder.jpg" alt="" />
-          <h5>Gato</h5>
+        <div v-for="breed in breeds" :key="breed" class="image-card">
+          <img :src="breed.photo" :alt="'Photo of ' + breed.name" />
+          <h5>{{breed.name}}</h5>
         </div>
       </div>
     </div>
@@ -35,7 +23,32 @@
 </template>
 
 <script>
-export default {};
+import axios from 'axios';
+const api = axios.create({
+  baseURL: 'http://localhost:8000/',
+});
+
+export default {
+  data() {
+    return {
+      breeds: []
+    }
+  },
+  created() {
+    api
+      .get('breeds/top')
+      .then((response) => {
+        response.data.slice(0, 4).forEach((element) => {
+          let cat = {
+            name: element.breed_name,
+            photo: element.breed_photo_url,
+          };
+
+          this.breeds.push(cat);
+        })
+      });
+  }
+};
 </script>
 
 <style>
@@ -98,4 +111,5 @@ h5 {
   font-weight: 600;
   font-size: 18px;
 }
+
 </style>
