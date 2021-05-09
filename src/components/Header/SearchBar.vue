@@ -1,6 +1,5 @@
 <template>
   <div class="search autocomplete">
-    <marquee behavior="" direction="">{{breeds}}</marquee>
     <span class="material-icons">search</span>
     <input type="text" v-model="breed_name" placeholder="Digite sua raça aqui"/>
     <ul v-show="breeds.length > 0" class="autocomplete-results">
