@@ -44,16 +44,11 @@ export default {
       api
         .get('breeds/' + query + '/')
         .then((response) => {
-          console.log(response);
           response.data.forEach(element => {
-            console.log(element)
             if(this.breeds.indexOf(element) === -1) this.breeds.push(element);
           });
         });
     }
-  },
-  mounted() {
-    console.log(this.breeds.length)
   }
 };
 </script>
@@ -108,8 +103,19 @@ span {
     color: #000;
   }
 
+  .autocomplete-result a {
+    text-decoration: none;
+    color: #000;
+  }
+
+  .autocomplete-result:hover a {
+    color: #fff;
+  }
+
   .autocomplete-result:hover {
     background-color: #313534;
     color: #fff
   }
+  
+ 
 </style>
