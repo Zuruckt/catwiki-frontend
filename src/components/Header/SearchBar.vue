@@ -4,7 +4,7 @@
     <input type="text" v-model="breed_name" placeholder="Digite sua raça aqui"/>
     <ul v-show="breeds.length > 0" class="autocomplete-results">
       <li v-for="breed in breeds" :key="breed" class="autocomplete-result">
-        {{breed}}
+        <router-link :to="{ name: 'breed', params: { breed: breed }}" >{{breed}}</router-link>
       </li>
     </ul>
   </div>
