@@ -14,9 +14,6 @@
 import axios from "axios";
 const api = axios.create({
   baseURL: process.env.VUE_APP_API_BASEURL,
-  headers: {
-    'Accept': 'application/json'
-  }
 });
 
 export default {
@@ -45,7 +42,7 @@ export default {
   methods: {
     fetchResults(query) {
       api
-        .get('breeds/' + query)
+        .get('breeds/' + query + '/')
         .then((response) => {
           console.log(response);
           response.data.forEach(element => {

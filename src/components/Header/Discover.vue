@@ -26,9 +26,6 @@
 import axios from 'axios';
 const api = axios.create({
   baseURL: process.env.VUE_APP_API_BASEURL,
-  headers: {
-    'Accept': 'application/json'
-  }
 });
 
 export default {
@@ -39,7 +36,7 @@ export default {
   },
   created() {
     api
-      .get('breeds/top')
+      .get('breeds/top/')
       .then((response) => {
         response.data.slice(0, 4).forEach((element) => {
           let cat = {
